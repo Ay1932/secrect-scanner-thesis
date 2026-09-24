@@ -1,0 +1,15 @@
+# Core (needed for the baseline scanner + evaluation harness)
+requests>=2.31.0
+scikit-learn>=1.4.0
+scipy>=1.11.0
+pandas>=2.2.0
+python-dotenv>=1.0.0
+
+# Only needed if you use the hosted LLM_BACKEND instead of local Ollama
+anthropic>=0.34.0
+
+# Only needed for data/fetch_repos.py (real-world GitHub sampling)
+PyGithub>=2.3.0
+
+# Optional: nicer progress bars during classification runs (auto-skipped if absent)
+tqdm>=4.66.0
