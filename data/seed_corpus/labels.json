@@ -1,0 +1,29 @@
+{
+  "_readme": "Ground truth for the seeded corpus (repo_alpha, repo_beta). Every category value is one of: real_secret, placeholder, test_fixture, non_secret_high_entropy, not_a_candidate. 'not_a_candidate' means the line should never be flagged at all (e.g. loaded from an env var, no literal value present). Use eval/metrics.py against this file plus a detector's JSON output to compute precision/recall/F1. All values in this corpus are synthetic -- none are real, working credentials.",
+  "labels": [
+    {"file": "repo_alpha/config.py", "line": 5, "category": "real_secret", "note": "AWS access key ID"},
+    {"file": "repo_alpha/config.py", "line": 6, "category": "real_secret", "note": "AWS secret access key"},
+    {"file": "repo_alpha/config.py", "line": 7, "category": "real_secret", "note": "generic high-entropy password"},
+    {"file": "repo_alpha/config.py", "line": 12, "category": "placeholder", "note": "AWS's own published docs example key, contains EXAMPLE"},
+    {"file": "repo_alpha/config.py", "line": 15, "category": "placeholder", "note": "your_api_key_here"},
+    {"file": "repo_alpha/config.py", "line": 16, "category": "placeholder", "note": "replace_with_your_real_key template text"},
+    {"file": "repo_alpha/config.py", "line": 19, "category": "not_a_candidate", "note": "loaded from os.environ, no literal secret value present"},
+    {"file": "repo_alpha/config.py", "line": 23, "category": "non_secret_high_entropy", "note": "a commit hash, not a credential, but high entropy"},
+    {"file": "repo_alpha/config.py", "line": 27, "category": "real_secret", "note": "edge case: short-lived token, only 10 chars, below typical length heuristics"},
+
+    {"file": "repo_alpha/src/auth.py", "line": 5, "category": "real_secret", "note": "RSA private key block"},
+    {"file": "repo_alpha/src/auth.py", "line": 15, "category": "real_secret", "note": "edge case: GitHub token leaked inside a code comment, not an assignment"},
+    {"file": "repo_alpha/src/auth.py", "line": 20, "category": "real_secret", "note": "Slack webhook token"},
+
+    {"file": "repo_alpha/tests/test_auth.py", "line": 9, "category": "test_fixture", "note": "OpenAI-format key, inert test fixture -- the core false-positive case this thesis targets"},
+    {"file": "repo_alpha/tests/test_auth.py", "line": 10, "category": "test_fixture", "note": "Stripe-format key, inert test fixture"},
+
+    {"file": "repo_alpha/settings.yaml", "line": 8, "category": "real_secret", "note": "Google API key in a YAML config file"},
+    {"file": "repo_alpha/settings.yaml", "line": 9, "category": "real_secret", "note": "Google OAuth client ID"},
+    {"file": "repo_alpha/settings.yaml", "line": 13, "category": "placeholder", "note": "changeme template value"},
+
+    {"file": "repo_beta/.env.production", "line": 11, "category": "real_secret", "note": "edge case: credential embedded in a connection URL, not a key=value pair -- deliberately NOT matched by any current regex in patterns.py, demonstrates a baseline recall gap (see RQ3)"},
+    {"file": "repo_beta/src/index.js", "line": 2, "category": "real_secret", "note": "Stripe live secret key"},
+    {"file": "repo_beta/src/index.js", "line": 5, "category": "placeholder", "note": "commented-out README example, YOUR_API_KEY placeholder"}
+  ]
+}

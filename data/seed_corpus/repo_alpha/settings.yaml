@@ -1,0 +1,13 @@
+app:
+  name: demo-service
+  debug: false
+
+# Real secret hardcoded in a config file rather than code
+# (ground truth: TRUE POSITIVE)
+integrations:
+  google_api_key: "AIzaSyD4kL9mN2pQ7rS0tU3vW6xY8zA1bC4dEfG"
+  google_oauth_client_id: "294857103821-a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6.apps.googleusercontent.com"
+
+# Placeholder left in template config (ground truth: PLACEHOLDER)
+smtp:
+  password: "changeme"
